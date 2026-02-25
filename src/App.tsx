@@ -1,11 +1,13 @@
 import React from 'react'
-import List from './pages/manage/List';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
 export default function App() {
   return (
     <div className="App">
-        <h1 style={{background:'yellow'}}>问卷</h1>
-        <List />
+        <RouterProvider router={router} >
+          
+        </RouterProvider>
     </div>
   )
 }
