@@ -11,6 +11,8 @@ import NotFound from '../pages/NotFound'
 import MyList from '../pages/manage/List'
 import Star from '../pages/manage/Star'
 import Trash from '../pages/manage/Trash'
+import Edit from '../pages/question/Edit'
+import Stat from '../pages/question/Stat'
 
 const router=createBrowserRouter([
     {
@@ -22,19 +24,51 @@ const router=createBrowserRouter([
                 element:<Home />
             },
             {
-                path:'/login',
+                path:'login',
                 element:<Login />
             },
             {
-                path:'/register',
+                path:'register',
                 element:<Register />
+            },
+            {
+                path:'manage',
+                element:<ManageLayout />,
+                children:[
+                    {
+                        path:'list',
+                        element:<MyList />
+                    },
+                    {
+                        path:'star',
+                        element:<Star />
+                    },
+                    {
+                        path:'trash',
+                        element:<Trash />
+                    }
+                ]
             },
             {
                 path:'*',      //404路由配置，都写在最后（兜底）
                 element:<NotFound />
             }
         ]
-    }
+    },
+    {
+                path:'question',
+                element:<QuestionLayout />,
+                children:[
+                    {
+                        path:'edit/:id',
+                        element:<Edit />
+                    },
+                    {
+                        path:'stat/:id',
+                        element:<Stat />
+                    }
+                ]
+            },
 ]);
 
 export default router;
