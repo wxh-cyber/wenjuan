@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
 // import { useSearchParams } from 'react-router-dom';
-import {useTitle} from 'ahooks'
+import { useTitle } from 'ahooks'
 import QuestionCard from '../../components/QuestionCard';
-import styles from './List.module.scss'
+import styles from './common.module.scss'
 
 const rawQuestionList = [
   {
@@ -57,9 +57,10 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
+        {/* 问卷列表 */}
         {
-          questionList.map((question) => {
-            const {_id}=question;
+          questionList.length > 0 && questionList.map((question) => {
+            const { _id } = question;
             return <QuestionCard key={_id} {...question} />;
           })
         }
