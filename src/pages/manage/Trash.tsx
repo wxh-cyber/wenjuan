@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import ListSearch from '../../components/ListSearch';
 import { useTitle } from 'ahooks'
 import { Typography, Empty, Table, Tag, Button, Space ,Modal} from 'antd'
 import {ExclamationCircleOutlined} from '@ant-design/icons'
@@ -108,7 +109,7 @@ const Trash: FC = () => {
                     <Title level={3}>回收站</Title>
                 </div>
                 <div className={styles.right}>
-                    （搜索）
+                    <ListSearch />
                 </div>
             </div>
             <div className={styles.content}>
