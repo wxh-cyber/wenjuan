@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionListData from '../../hooks/useLoadQuestionListData';
+import ListPage from '../../components/ListPage';
 import { useTitle } from 'ahooks'
 import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
@@ -96,6 +97,9 @@ const Trash: FC = () => {
                 )}
                 {!loading && list.length === 0 && <Empty description="暂无回收站问卷" />}
                 {list.length > 0 && TableElem}
+            </div>
+            <div className={styles.footer}>
+                <ListPage total={total} />
             </div>
         </div>
     )

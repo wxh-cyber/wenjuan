@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
 import QuestionCard from '../../components/QuestionCard';
 import ListSearch from '../../components/ListSearch';
-import { Typography, Empty, Spin } from 'antd';
+import ListPage from '../../components/ListPage';
+import { Typography, Empty, Spin, Pagination } from 'antd';
 import { useTitle } from 'ahooks'
 import useLoadQuestionListData from '../../hooks/useLoadQuestionListData';
 import styles from './common.module.scss'
@@ -39,7 +40,7 @@ const Star: FC = () => {
                 }
             </div>
             <div className={styles.footer}>
-                分页
+                <ListPage total={total} />
             </div>
         </div>
     )

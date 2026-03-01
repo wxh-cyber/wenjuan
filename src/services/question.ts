@@ -3,7 +3,9 @@ import axios, { ResDataType } from './ajax';
 type SearchOption = {
     keyword: string,
     isStar: boolean,
-    isDeleted: boolean
+    isDeleted: boolean,
+    page:number,
+    pageSize:number
 }
 
 //获取单个问卷信息
