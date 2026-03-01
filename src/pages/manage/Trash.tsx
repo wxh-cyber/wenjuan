@@ -1,36 +1,10 @@
 import React, { FC, useState } from 'react'
 import ListSearch from '../../components/ListSearch';
+import useLoadQuestionListData from '../../hooks/useLoadQuestionListData';
 import { useTitle } from 'ahooks'
-import { Typography, Empty, Table, Tag, Button, Space ,Modal} from 'antd'
-import {ExclamationCircleOutlined} from '@ant-design/icons'
+import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
 import styles from './common.module.scss'
-
-const rawQuestionList = [
-    {
-        _id: 'q1',
-        title: '问卷1',
-        isPublished: false,
-        isStar: true,
-        answerCount: 5,
-        createTime: '2023-01-01'
-    },
-    {
-        _id: 'q2',
-        title: '问卷2',
-        isPublished: true,
-        isStar: false,
-        answerCount: 10,
-        createTime: '2023-01-02'
-    },
-    {
-        _id: 'q3',
-        title: '问卷3',
-        isPublished: false,
-        isStar: false,
-        answerCount: 3,
-        createTime: '2023-01-03'
-    }
-];
 
 const { Title } = Typography;
 const { confirm } = Modal;
@@ -38,19 +12,21 @@ const { confirm } = Modal;
 const Trash: FC = () => {
     useTitle('小慕问卷 - 回收站');
 
-    const [questionList, setQuestionList] = useState(rawQuestionList);
+    const { data = {}, loading } = useLoadQuestionListData({isDeleted:true});
+    const { list = [], total } = data;
 
+    //记录选中的Id
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-    function del(){
+    function del() {
         confirm({
-            title:'确认彻底删除该问卷吗？',
-            icon:<ExclamationCircleOutlined/>,
-            content:'删除以后将不可找回',
-            okText:'确认',
-            okType:'danger',
-            cancelText:'取消',
-            onOk:()=>{
+            title: '确认彻底删除该问卷吗？',
+            icon: <ExclamationCircleOutlined />,
+            content: '删除以后将不可找回',
+            okText: '确认',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk: () => {
                 alert(`删除 ${JSON.stringify(selectedIds)}`)
             }
         });
@@ -82,17 +58,17 @@ const Trash: FC = () => {
 
     //可以把JSX片段定义为一个变量
     const TableElem = <div>
-        <div style={{ marginBottom:'16px' }}>
+        <div style={{ marginBottom: '16px' }}>
             <Space>
                 <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
                 <Button danger disabled={selectedIds.length === 0} onClick={del}>彻底删除</Button>
             </Space>
         </div>
         <Table
-            dataSource={questionList}
+            dataSource={list}
             columns={tableColumns}
             pagination={false}
-            rowKey={(q) => q._id}
+            rowKey={(q:any) => q._id}
             rowSelection={{
                 type: 'checkbox',
                 onChange: (selectedRowKeys) => {
@@ -113,8 +89,13 @@ const Trash: FC = () => {
                 </div>
             </div>
             <div className={styles.content}>
-                {questionList.length === 0 && <Empty description="暂无回收站问卷" />}
-                {questionList.length > 0 && TableElem}
+                {loading && (
+                    <div style={{ textAlign: 'center' }}>
+                        <Spin />
+                    </div>
+                )}
+                {!loading && list.length === 0 && <Empty description="暂无回收站问卷" />}
+                {list.length > 0 && TableElem}
             </div>
         </div>
     )

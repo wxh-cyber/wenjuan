@@ -4,12 +4,12 @@ import useLoadQuestionData from '../../../hooks/useLoadQuestionData';
 
 const Edit:FC=()=>{
     //const {id=''}=useParams();
-    const {loading,questionData}=useLoadQuestionData();
+    const {loading,data}=useLoadQuestionData();
 
     return (
         <div>
             <p>Edit Page</p>
-            {loading?<p>loading...</p>:<div>{JSON.stringify(questionData)}</div>}
+            {loading?<p>loading...</p>:<div>{JSON.stringify(data)}</div>}
         </div>
     )
 }

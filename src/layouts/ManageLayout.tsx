@@ -2,27 +2,36 @@ import React, { FC ,useState} from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { createQuestionService } from '../services/question';
 import { Button, Space, Divider, message } from 'antd';
+import {useRequest} from 'ahooks';
 import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons';
 import styles from './ManageLayout.module.scss'
 
 const ManageLayout: FC = () => {
     const nav = useNavigate();
     const { pathname } = useLocation();
-    const [loading,setLoading]=useState(false);
+    // const [loading,setLoading]=useState(false);
 
-    async function handleCreateClick() {
-        setLoading(true);
+    // async function handleCreateClick() {
+    //     setLoading(true);
 
-        const data = await createQuestionService();
-        const { id } = data || {};
+    //     const data = await createQuestionService();
+    //     const { id } = data || {};
 
-        if (id) {
-            nav(`/question/edit/${id}`);
-            message.success('新建问卷成功');
-        }
+    //     if (id) {
+    //         nav(`/question/edit/${id}`);
+    //         message.success('新建问卷成功');
+    //     }
 
-        setLoading(false);
-    }
+    //     setLoading(false);
+    // }
+
+    const {loading,error,run:handleCreateClick}=useRequest(createQuestionService,
+        {manual:true,
+            onSuccess(result){
+                nav(`/question/edit/${result.id}`);
+                message.success('新建问卷成功');
+            }
+        },);
 
     return (
         <div className={styles.container}>

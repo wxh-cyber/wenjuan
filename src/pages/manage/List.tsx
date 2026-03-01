@@ -1,54 +1,22 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 // import { useSearchParams } from 'react-router-dom';
-import {Typography} from 'antd';
+import { Typography, Spin } from 'antd';
 import { useTitle } from 'ahooks'
 import QuestionCard from '../../components/QuestionCard';
 import ListSearch from '../../components/ListSearch';
+import useLoadQuestionListData from '../../hooks/useLoadQuestionListData';
 import styles from './common.module.scss'
 
 const { Title } = Typography;
 
-const rawQuestionList = [
-  {
-    _id: 'q1',
-    title: '问卷1',
-    isPublished: false,
-    isStar: false,
-    answerCount: 5,
-    createTime: '2023-01-01'
-  },
-  {
-    _id: 'q2',
-    title: '问卷2',
-    isPublished: true,
-    isStar: true,
-    answerCount: 10,
-    createTime: '2023-01-02'
-  },
-  {
-    _id: 'q3',
-    title: '问卷3',
-    isPublished: false,
-    isStar: false,
-    answerCount: 3,
-    createTime: '2023-01-03'
-  },
-  {
-    _id: 'q4',
-    title: '问卷4',
-    isPublished: true,
-    isStar: true,
-    answerCount: 15,
-    createTime: '2023-01-04'
-  },
-];
 const List: FC = () => {
   useTitle('小慕问卷 - 我的问卷');
 
   // const [searchParams] = useSearchParams();
   // console.log('keyword',searchParams.get('keyword'));
 
-  const [questionList, setQuestionList] = useState(rawQuestionList);
+  const { data = {}, loading } = useLoadQuestionListData();
+  const { list = [], total = 0 } = data;
 
   return (
     <>
@@ -61,9 +29,14 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
         {/* 问卷列表 */}
         {
-          questionList.length > 0 && questionList.map((question) => {
+          (!loading && list.length > 0) && list.map((question: any) => {
             const { _id } = question;
             return <QuestionCard key={_id} {...question} />;
           })
