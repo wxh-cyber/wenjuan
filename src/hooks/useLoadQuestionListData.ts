@@ -13,7 +13,7 @@ function useLoadQuestionListData(opt:Partial<OptionType>={}) {
     const [searchParams] = useSearchParams();
 
     //由于这里的keyword会产生变化，因此将其写成异步函数的形式
-    const { data, loading, error } = useRequest(async () => {
+    const { data, loading, error,refresh } = useRequest(async () => {
         const keyword = searchParams.get(LIST_SEARCH_PARAM_KEY) || '';
         const page=parseInt(searchParams.get(LIST_PAGE_PARAM_KEY) || '')||1;
         const pageSize=parseInt(searchParams.get(LIST_PAGE_SIZE_PARAM_KEY) || '')||LIST_PAGE_SIZE;
@@ -27,7 +27,8 @@ function useLoadQuestionListData(opt:Partial<OptionType>={}) {
     return {
         data,
         loading,
-        error
+        error,
+        refresh
     }
 }
 

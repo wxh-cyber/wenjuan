@@ -2,8 +2,9 @@ import React, { FC, useState } from 'react'
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionListData from '../../hooks/useLoadQuestionListData';
 import ListPage from '../../components/ListPage';
-import { useTitle } from 'ahooks'
-import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
+import { updateQuestionService,deleteQuestionService } from '../../services/question';
+import { useTitle, useRequest } from 'ahooks'
+import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin ,message} from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import styles from './common.module.scss'
 
@@ -13,11 +14,38 @@ const { confirm } = Modal;
 const Trash: FC = () => {
     useTitle('小慕问卷 - 回收站');
 
-    const { data = {}, loading } = useLoadQuestionListData({isDeleted:true});
+    const { data = {}, loading ,refresh} = useLoadQuestionListData({ isDeleted: true });
     const { list = [], total } = data;
 
     //记录选中的Id
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+    //恢复
+    const { run: recover } = useRequest(async () => {
+        for await (const id of selectedIds) {       //for await：串行执行异步操作，只有前一个请求成功返回，才会发送后一个请求。
+            await updateQuestionService(id, { isDeleted: false });
+        }
+    }, {
+        manual: true,
+        debounceWait: 500,      //防抖等待时间，单位毫秒
+        onSuccess:()=>{
+            message.success('恢复成功');
+            refresh();      //手动刷新列表
+            //注意refresh并不会更新state，所以需要手动重置
+            setSelectedIds([]); 
+        }
+    })
+
+    //删除
+    const {run:deleteQuestion}=useRequest(async ()=> await deleteQuestionService(selectedIds),{
+        manual:true,
+        onSuccess:()=>{
+            message.success('删除成功');
+            refresh();        //此处相当于run(...previousParams)
+            //注意refresh并不会更新state，所以需要手动重置
+            setSelectedIds([]);
+        }
+    });
 
     function del() {
         confirm({
@@ -27,9 +55,7 @@ const Trash: FC = () => {
             okText: '确认',
             okType: 'danger',
             cancelText: '取消',
-            onOk: () => {
-                alert(`删除 ${JSON.stringify(selectedIds)}`)
-            }
+            onOk: deleteQuestion
         });
     }
 
@@ -61,7 +87,11 @@ const Trash: FC = () => {
     const TableElem = <div>
         <div style={{ marginBottom: '16px' }}>
             <Space>
-                <Button type="primary" disabled={selectedIds.length === 0}>恢复</Button>
+                <Button
+                    type="primary"
+                    disabled={selectedIds.length === 0}
+                    onClick={recover}
+                >恢复</Button>
                 <Button danger disabled={selectedIds.length === 0} onClick={del}>彻底删除</Button>
             </Space>
         </div>
@@ -69,7 +99,7 @@ const Trash: FC = () => {
             dataSource={list}
             columns={tableColumns}
             pagination={false}
-            rowKey={(q:any) => q._id}
+            rowKey={(q: any) => q._id}
             rowSelection={{
                 type: 'checkbox',
                 onChange: (selectedRowKeys) => {

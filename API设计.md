@@ -40,6 +40,7 @@
 ### 更新问卷信息
 - method `patch`
 - path `/api/question/:id`
+- request body `{ title:string,isStar:boolean }`
 - response `{ errno:0 }`
 
 PS:删除是假删除，实际是更新`isDeleted`属性
