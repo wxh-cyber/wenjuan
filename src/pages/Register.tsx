@@ -1,15 +1,31 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link ,useNavigate} from 'react-router-dom'
 import { LOGIN_PATHNAME } from '../router';
+import { registerService } from '../services/user';
+import {useRequest} from 'ahooks';
 import styles from './Register.module.scss'
-import { Typography, Space, Form, Input, Button } from 'antd';
+import { Typography, Space, Form, Input, Button ,message} from 'antd';
 import { UserAddOutlined } from '@ant-design/icons'
 
 const { Title } = Typography;
 
 const Register: FC = () => {
+    const nav=useNavigate();
+
+    const {run}=useRequest(async values=>{
+        const {username,password,nickname}=values;
+        const data=await registerService(username,password,nickname);
+        return data;
+    },{
+        manual:true,
+        onSuccess:()=>{
+            message.success('注册成功');
+            nav(LOGIN_PATHNAME);     //跳转到登录页
+        }
+    })
+
     const onFinish = (values: any) => {
-        console.log('onFinish', values);
+        run(values);      //调用ajax
     }
 
     return (

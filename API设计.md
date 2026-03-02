@@ -17,7 +17,7 @@
 - method `post`
 - path `/api/user/login`
 - request body `{ username:string,password:string }`
-- response `{ errno:0,token }` —— **JWT** 使用Token
+- response `{ errno:0,data:{token} }` —— **JWT** 使用Token
 
 ## 问卷功能
 
