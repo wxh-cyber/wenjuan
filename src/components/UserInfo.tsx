@@ -5,13 +5,14 @@ import { useRequest } from 'ahooks'
 import { Button,message } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { LOGIN_PATHNAME } from '../router/index'
-import { removeToken } from '../utils/user-token'
+import { removeToken,getToken } from '../utils/user-token'
 
 const UserInfo: FC = () => {
     const nav=useNavigate();
 
     const { data } = useRequest(getUserInfoService);
     const { username, nickname } = data || {};
+    const token=getToken();
 
     function logout(){
         removeToken();      //清除token的存储
@@ -36,7 +37,8 @@ const UserInfo: FC = () => {
 
     return (
         <div>
-            {username ? UserInfo : Login}
+            {/* 采用token判断登录状态，可以在退出之后，组件进行响应式更新 */}
+            {token ? UserInfo : Login}
         </div>
     )
 }

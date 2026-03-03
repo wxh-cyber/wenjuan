@@ -1,7 +1,8 @@
 import React, { FC ,useEffect } from 'react'
 import { useNavigate,Link } from 'react-router-dom'
-import {Button,Typography} from 'antd';
-import {MANAGE_INDEX_PATHNAME} from '../router/index'
+import {Button,Typography,message} from 'antd';
+import {MANAGE_INDEX_PATHNAME,LOGIN_PATHNAME} from '../router/index'
+import {getToken} from '../utils/user-token'
 import styles from './Home.module.scss'
 
 import axios from 'axios'
@@ -21,6 +22,19 @@ const Home:FC=()=>{
             console.log(res.data);
         });
     },[]);
+
+    function clickUseHandler(){
+        const token=getToken();
+        if(token){
+            //如果保留有token，说明用户已经登录，直接跳转到管理页面
+            message.success('登录成功');
+            nav(MANAGE_INDEX_PATHNAME);
+        }else{
+            //如果没有token，说明用户未登录，跳转到登录页面
+            message.error('请先登录');
+            nav(LOGIN_PATHNAME);
+        }
+    }
 
     // useEffect(()=>{
     //     // fetch('/api/test').then(res=>res.json()).then(data=>{
@@ -49,7 +63,7 @@ const Home:FC=()=>{
                     已累计创建问卷100份，发布问卷90份，收到答卷980份
                 </Paragraph>
                 <div>
-                    <Button type="primary" onClick={()=>nav(MANAGE_INDEX_PATHNAME)} >开始使用</Button>
+                    <Button type="primary" onClick={clickUseHandler} >开始使用</Button>
                 </div>
             </div>
         </div>
