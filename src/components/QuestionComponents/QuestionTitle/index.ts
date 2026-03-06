@@ -3,13 +3,14 @@
  * @author 小慕
  */
 import Component from './Component';
-import {QuestionTitleDefaultProps} from './interface';
+import { QuestionTitleDefaultProps } from './interface';
 
 export * from './interface';
 
+//Title组件的配置
 export default {
-    title:'标题',
-    type:'questionTitle',
+    title: '标题',
+    type: 'questionTitle',
     Component,
-    defaultProps:QuestionTitleDefaultProps
+    defaultProps: QuestionTitleDefaultProps
 }
