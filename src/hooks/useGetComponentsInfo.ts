@@ -6,8 +6,10 @@ function useGetComponentsInfo(){
     const components=useSelector<StateType>(state => state.components) as ComponentsStateType;
 
     const {componentList=[],selectedId=''}=components;
+
+    const selectedComponent=componentList.find(item => item.fe_id===selectedId);
     //向外暴露componentList和selectedId
-    return {componentList,selectedId};
+    return {componentList,selectedId,selectedComponent};
 }
 
 export default useGetComponentsInfo;

@@ -15,7 +15,7 @@ function genComponent(c: ComponentConfigType,dispatch:any) {
 
     function handleClick(){
         dispatch(addComponent({
-            fe_id:nanoid(),
+            fe_id:nanoid(),       //前端生成的id
             title,
             type,
             props:defaultProps
