@@ -1,23 +1,34 @@
 import { FC } from "react";
 import { Button, Space, Tooltip } from 'antd';
-import { DeleteOutlined, 
+import {
+    DeleteOutlined,
     EyeInvisibleOutlined,
-     LockOutlined,
-     CopyOutlined,
-    BlockOutlined } from "@ant-design/icons";
+    LockOutlined,
+    CopyOutlined,
+    BlockOutlined,
+    UpOutlined,
+    DownOutlined
+} from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { removeSelectedComponent, 
-    changeComponentHidden, 
+import {
+    removeSelectedComponent,
+    changeComponentHidden,
     toggleComponentLocked,
     copySelectedComponent,
-    pasteCopiedComponent } from "../../../store/componentsReducer";
+    pasteCopiedComponent,
+    moveComponent
+} from "../../../store/componentsReducer";
 import useGetComponentInfo from "../../../hooks/useGetComponentsInfo";
 
 const EditToolBar: FC = () => {
     const dispatch = useDispatch();
 
-    const { selectedId, selectedComponent,copiedComponent } = useGetComponentInfo();
+    const { selectedId, selectedComponent, componentList, copiedComponent } = useGetComponentInfo();
     const { isLocked } = selectedComponent || {};
+    const length = componentList.length;
+    const selectedIndex = componentList.findIndex(item => item.fe_id === selectedId);
+    const isFirst = selectedIndex <= 0;       //第一个
+    const isLast = selectedIndex >= length - 1;   //最后一个
 
     //删除组件
     function handleDelete() {
@@ -35,16 +46,26 @@ const EditToolBar: FC = () => {
     }
 
     //复制
-    function copy(){
+    function copy() {
         dispatch(copySelectedComponent());
     }
 
     //粘贴
-    function paste(){
+    function paste() {
         dispatch(pasteCopiedComponent());
     }
 
+    //上移
+    function moveUp() {
+        if(isFirst) return;
+        dispatch(moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex - 1 }));
+    }
 
+    //下移
+    function moveDown() {
+        if(isLast) return;
+        dispatch(moveComponent({ oldIndex: selectedIndex, newIndex: selectedIndex + 1 }));
+    }
 
     return (
         <Space>
@@ -79,11 +100,27 @@ const EditToolBar: FC = () => {
             </Tooltip>
             <Tooltip title="粘贴">
                 <Button
-                shape="circle"
-                icon={<BlockOutlined />}
-                onClick={paste}
-                disabled={!copiedComponent}
+                    shape="circle"
+                    icon={<BlockOutlined />}
+                    onClick={paste}
+                    disabled={!copiedComponent}
                 ></Button>
+            </Tooltip>
+            <Tooltip title="上移">
+                <Button
+                    shape="circle"
+                    icon={<UpOutlined />}
+                    onClick={moveUp}
+                    disabled={isFirst}>
+                </Button>
+            </Tooltip>
+            <Tooltip title="下移">
+                <Button
+                shape="circle"
+                icon={<DownOutlined />}
+                onClick={moveDown}
+                disabled={isLast}>
+                </Button>
             </Tooltip>
         </Space>
     )
