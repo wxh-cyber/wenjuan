@@ -1,20 +1,23 @@
-## 路由设计
+## 项目介绍
+    基于React 19+Redux+TypeScript实现的小慕问卷管理系统。
 
-## 页面对应的路由
+### 启动方式
 
-- 首页：`/`
-- 登录：`/login`
-- 注册：`/register`
-- 问卷管理
-    - 我的问卷：`/manage/list`
-    - 星标问卷：`/manage/star`
-    - 回收站：`/manage/trash`
-- 问卷详情
-    - 编辑问卷：`/question/edit/:id`
-    - 问卷统计：`/question/stat/:id`
-- 404
+1. 克隆项目到本地
 
-### Layout模板
-- MainLayout
-- ManageLayout
-- QuestionLayout
+    ```Shell
+    git clone https://github.com/yourusername/wenjuan.git
+    cd wenjuan
+    ```
+
+2. 安装依赖
+
+    ```Shell
+    npm install
+    ```
+
+3. 启动项目
+
+    ```Shell
+    npm run start
+    ```

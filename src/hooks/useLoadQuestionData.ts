@@ -23,7 +23,12 @@ function useLoadQuestionData() {
     useEffect(() => {
         if (!data) return;
 
-        const { title = '', desc = '', js = '', css = '', componentList = [] } = data;
+        const { title = '',
+            desc = '',
+            js = '',
+            css = '',
+            isPublished = false,
+            componentList = [] } = data;
 
         //获取默认的selectedId
         let selectedId = '';
@@ -35,7 +40,7 @@ function useLoadQuestionData() {
         dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }));
 
         //把问卷标题存储到redux store中
-        dispatch(resetPageInfo({ title, desc, js, css }));
+        dispatch(resetPageInfo({ title, desc, js, css, isPublished }));
     }, [data]);
 
     //判断id变化，执行Ajax加载问卷数据

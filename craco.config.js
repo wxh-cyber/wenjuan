@@ -1,5 +1,6 @@
 module.exports={
     devServer:{
+        port:8000,      //B端，前端
         //配置代理
         proxy:{
             '/api':{

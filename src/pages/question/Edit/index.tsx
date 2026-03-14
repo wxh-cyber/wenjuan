@@ -7,6 +7,8 @@ import EditHeader from './EditHeader';
 import EditCanvas from './EditCanvas';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
+import { useTitle } from 'ahooks';
+import useGetPageInfo from '../../../hooks/useGetPageInfo';
 import styles from './index.module.scss';
 
 const Edit: FC = () => {
@@ -17,6 +19,11 @@ const Edit: FC = () => {
     function clearSelectedId(){
         dispatch(changeSelectedId(''));
     }
+
+    const {title}=useGetPageInfo();
+
+    //修改标题
+    useTitle(`问卷编辑 - ${title}`);
 
     return (
         <div className={styles.container}>
