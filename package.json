@@ -32,7 +32,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "craco test --watchAll=false",
     "eject": "react-scripts eject",
     "analyze":"source-map-explorer build/static/js/*.js --no-border-checks --html build/sme-report.html"
   },

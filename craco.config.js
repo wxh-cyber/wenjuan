@@ -43,5 +43,15 @@ module.exports={
                 changeOrigin:true,
             }
         }
+    },
+
+    //增加jest配置，保证antd组件的样式可以被正确加载
+    jest:{
+        configure:{
+            moduleNameMapper:{
+                '^@rc-component/picker/locale/(.*)$':'<rootDir>/node_modules/@rc-component/picker/lib/locale/$1.js',
+                '^@rc-component/picker/generate/(.*)$':'<rootDir>/node_modules/@rc-component/picker/lib/generate/$1.js'
+            }
+        }
     }
 }
