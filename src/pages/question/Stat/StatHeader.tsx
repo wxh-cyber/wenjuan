@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useMemo } from "react";
 import { Button, Space, Typography, Input, Tooltip, message, Popover } from "antd";
 import type { InputRef } from "antd";
 import { LeftOutlined, CopyOutlined, QrcodeOutlined } from "@ant-design/icons";
@@ -26,7 +26,34 @@ const StatHeader: FC = () => {
         message.success('拷贝成功');
     }
 
-    function genLinkAndQRCode() {
+    // function genLinkAndQRCode() {
+    //     if (!isPublished) return null;
+
+    //     //拼接url，需要参考C端的规则
+    //     const url = `http://localhost:3000/question/${id}`;
+
+    //     //定义二维码组件
+    //     const QRCodeElem = (
+    //         <div style={{ textAlign: 'center' }}>
+    //             <QRCodeSVG value={url} size={150} />
+    //         </div>
+    //     );
+
+    //     return (
+    //         <Space>
+    //             <Input value={url} style={{ width: '300px' }} ref={urlInputRef} />
+    //             <Tooltip title="拷贝链接">
+    //                 <Button icon={<CopyOutlined />} onClick={copy} />
+    //             </Tooltip>
+    //             <Popover content={QRCodeElem}>
+    //                 <Button icon={<QrcodeOutlined />} />
+    //             </Popover>
+    //         </Space>
+    //     )
+    // }
+
+    //使用useMemo
+    const LinkAndQRCodeElem = useMemo(() => {
         if (!isPublished) return null;
 
         //拼接url，需要参考C端的规则
@@ -50,7 +77,8 @@ const StatHeader: FC = () => {
                 </Popover>
             </Space>
         )
-    }
+    }, [id, isPublished]);
+
 
     return (
         <div className={styles['header-wrapper']}>
@@ -67,7 +95,7 @@ const StatHeader: FC = () => {
                     </Space>
                 </div>
                 <div className={styles.main}>
-                    {genLinkAndQRCode()}
+                    {LinkAndQRCodeElem}
                 </div>
                 <div className={styles.right}>
                     <Button
