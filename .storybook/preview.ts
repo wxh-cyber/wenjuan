@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-webpack5'
+import 'antd/dist/reset.css';
 
 const preview: Preview = {
   parameters: {

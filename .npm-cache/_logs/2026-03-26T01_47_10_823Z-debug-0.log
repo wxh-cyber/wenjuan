@@ -1,0 +1,78 @@
+0 verbose cli D:\Program_Files\nodejs\node.exe D:\Program_Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.0
+2 info using node@v22.12.0
+3 silly config load:file:D:\Program_Files\nvm\v22.12.0\node_modules\npm\npmrc
+4 silly config load:file:D:\Code\React\React体系课\wenjuan\.npmrc
+5 silly config load:file:C:\Users\Administrator\.npmrc
+6 silly config load:file:D:\Program_Files\node-v24.12.0-win-x64\node-v24.12.0-win-x64\node_global\etc\npmrc
+7 verbose title npm pack create-storybook
+8 verbose argv "pack" "create-storybook" "--loglevel" "silent" "--pack-destination" "C:\\Users\\Administrator\\AppData\\Local\\Temp\\csb_assets_2acf0c6eb1c14686bed5762a699a5d4a"
+9 verbose logfile logs-max:10 dir:D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-26T01_47_10_823Z-
+10 verbose logfile D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-26T01_47_10_823Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 http fetch GET 200 https://registry.npmmirror.com/create-storybook 770ms (cache miss)
+14 http fetch GET 200 https://registry.npmmirror.com/create-storybook 18ms (cache hit)
+15 silly tarball no local data for https://registry.npmmirror.com/create-storybook/-/create-storybook-10.3.3.tgz. Extracting by manifest.
+16 http fetch GET 200 https://cdn.npmmirror.com/packages/create-storybook/10.3.3/create-storybook-10.3.3.tgz 1031ms (cache miss)
+17 notice
+18 notice package: create-storybook@10.3.3
+19 notice Tarball Contents
+20 notice 165B README.md
+20 notice 2.5kB dist/_node-chunks/chunk-4MSQFJZU.js
+20 notice 4.6kB dist/_node-chunks/chunk-MC4WJ7J3.js
+20 notice 132.9kB dist/_node-chunks/chunk-NLJKUZRJ.js
+20 notice 2.3kB dist/_node-chunks/chunk-TH7YHZJ7.js
+20 notice 12.1kB dist/_node-chunks/postinstallAddon-XOCKQHPH.js
+20 notice 118.0kB dist/_node-chunks/run-K76XXRSO.js
+20 notice 1.8kB dist/_node-chunks/vitest.config-L3NNXHQM.js
+20 notice 1.8kB dist/_node-chunks/vitest.config.3.2-JDQ6LTS7.js
+20 notice 1.9kB dist/_node-chunks/vitest.config.4-RP4NB32W.js
+20 notice 1.8kB dist/_node-chunks/vitest.workspace-QULLMWYV.js
+20 notice 1.4kB dist/bin/index.js
+20 notice 851B dist/index.js
+20 notice 1.4kB package.json
+20 notice 290B rendererAssets/.eslintrc.json
+20 notice 42.3kB rendererAssets/common/assets/accessibility.png
+20 notice 1.5kB rendererAssets/common/assets/accessibility.svg
+20 notice 467.4kB rendererAssets/common/assets/addon-library.png
+20 notice 3.9kB rendererAssets/common/assets/assets.png
+20 notice 829B rendererAssets/common/assets/avif-test-image.avif
+20 notice 6.1kB rendererAssets/common/assets/context.png
+20 notice 2.4kB rendererAssets/common/assets/discord.svg
+20 notice 27.9kB rendererAssets/common/assets/docs.png
+20 notice 44.2kB rendererAssets/common/assets/figma-plugin.png
+20 notice 2.7kB rendererAssets/common/assets/github.svg
+20 notice 40.8kB rendererAssets/common/assets/share.png
+20 notice 7.2kB rendererAssets/common/assets/styling.png
+20 notice 49.3kB rendererAssets/common/assets/testing.png
+20 notice 44.4kB rendererAssets/common/assets/theming.png
+20 notice 1.3kB rendererAssets/common/assets/tutorials.svg
+20 notice 716B rendererAssets/common/assets/youtube.svg
+20 notice 642B rendererAssets/common/button.css
+20 notice 12.3kB rendererAssets/common/Configure.mdx
+20 notice 623B rendererAssets/common/header.css
+20 notice 1.1kB rendererAssets/common/page.css
+20 notice 483B templates/angular/application/template-csf/.storybook/tsconfig.doc.json
+20 notice 341B templates/angular/application/template-csf/.storybook/tsconfig.json
+20 notice 77B templates/angular/application/template-csf/.storybook/typings.d.ts
+20 notice 306B templates/angular/library/template-csf/.storybook/tsconfig.json
+20 notice 77B templates/angular/library/template-csf/.storybook/typings.d.ts
+20 notice 255B templates/aurelia/template-csf/.storybook/tsconfig.json
+20 notice 77B templates/aurelia/template-csf/.storybook/typings.d.ts
+21 notice Tarball Details
+22 notice name: create-storybook
+23 notice version: 10.3.3
+24 notice filename: create-storybook-10.3.3.tgz
+25 notice package size: 804.3 kB
+26 notice unpacked size: 1.0 MB
+27 notice shasum: 16ff413f704efc6dd896feb7f841a60218d9cc30
+28 notice integrity: sha512-vwOQQaayn0Tyl[...]ekqXWmRFIFCYQ==
+29 notice total files: 42
+30 notice
+31 verbose cwd D:\Code\React\React体系课\wenjuan
+32 verbose os Windows_NT 10.0.19045
+33 verbose node v22.12.0
+34 verbose npm  v10.9.0
+35 verbose exit 0
+36 info ok

@@ -7,6 +7,7 @@
 6 silly config load:file:D:\Program_Files\node-v24.12.0-win-x64\node-v24.12.0-win-x64\node_global\etc\npmrc
 7 verbose title npm run storybook
 8 verbose argv "run" "storybook"
-9 verbose logfile logs-max:10 dir:D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-23T03_43_22_417Z-
-10 verbose logfile D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-23T03_43_22_417Z-debug-0.log
-11 silly logfile done cleaning log files
+9 verbose logfile logs-max:10 dir:D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-26T01_40_17_298Z-
+10 verbose logfile D:\Code\React\React体系课\wenjuan\.npm-cache\_logs\2026-03-26T01_40_17_298Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
